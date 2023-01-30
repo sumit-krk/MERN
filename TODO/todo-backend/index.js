@@ -4,12 +4,26 @@ const {connection,TodoModel} = require('./db')
 
 app.use(express.json());
 
+app.get("/getTask",async(req,res)=>{
+    try{
+        const task=await TodoModel.find(req.query);
+        res.send(task);
+    }catch(err){
+        console.log(err);
+        res.send("something went wrong");
+    }
+})
+
 app.post("/addTask",async(req,res)=>{
     const data=req.body;
-    console.log("data",data)
-    const task=new TodoModel(data);
-    await task.save();
-    res.send("task added")
+    try{
+        const task=new TodoModel(data);
+        await task.save();
+        res.send("task added")
+    }catch(err){
+        console.log(err)
+        res.send("something went wrong")
+    }
 })
 
 app.listen('3400',async()=>{
