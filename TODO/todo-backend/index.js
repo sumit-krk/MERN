@@ -26,6 +26,17 @@ app.post("/addTask",async(req,res)=>{
     }
 })
 
+app.patch("/editTask/:id",async (req,res)=>{
+    const ID=req.params.id;
+    const task=req.body;
+    try{
+        await TodoModel.findByIdAndUpdate({_id:ID},task)
+        res.send("Updated the task");
+    }catch(err){
+        console.log("something went wrong");
+    }
+})
+
 app.listen('3400',async()=>{
    try{
     await connection
