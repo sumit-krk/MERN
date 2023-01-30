@@ -37,6 +37,16 @@ app.patch("/editTask/:id",async (req,res)=>{
     }
 })
 
+app.patch("/delete/:id",async (req,res)=>{
+    const ID=req.params.id;
+    try{
+        await TodoModel.findByIdAndDelete({_id:ID})
+        res.send("deleted the task");
+    }catch(err){
+        console.log("something went wrong");
+    }
+})
+
 app.listen('3400',async()=>{
    try{
     await connection
