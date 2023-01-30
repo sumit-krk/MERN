@@ -1,8 +1,5 @@
 const mongoose=require("mongoose");
-const connection=await mongoose.connect("mongodb://127.0.0.1:27017/todo")
-module.exports={
-    connection
-}
+const connection= mongoose.connect("mongodb://127.0.0.1:27017/todo")
 
 // const main=async ()=>{
 //     try{
@@ -20,14 +17,19 @@ module.exports={
 //     }
 // }
 
-// const todoSchema=mongoose.Schema({
-//     text:{type:String,required:true},
-//     is_done:{type:Boolean,required:true}
-// },{
-//     versionKey:false
-// })
+const todoSchema=mongoose.Schema({
+    text:{type:String,required:true},
+    is_done:{type:Boolean,required:true}
+},{
+    versionKey:false
+})
 
-// const TodoModel=mongoose.model("task",todoSchema)
+const TodoModel=mongoose.model("task",todoSchema)
+
+module.exports={
+    connection,
+    TodoModel
+}
 
 // main();
 
