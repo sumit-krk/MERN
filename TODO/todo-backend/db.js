@@ -17,8 +17,8 @@ const main=async ()=>{
 }
 
 const todoSchema=mongoose.Schema({
-    text:String,
-    is_done:Boolean
+    text:{type:String,required:true},
+    is_done:{type:Boolean,required:true}
 },{
     versionKey:false
 })
