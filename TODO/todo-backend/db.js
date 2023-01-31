@@ -1,5 +1,6 @@
 const mongoose=require("mongoose");
-const connection= mongoose.connect("mongodb+srv://sumit:sumit@cluster0.irhgi.mongodb.net/todonew?retryWrites=true&w=majority")
+require('dotenv').config()
+const connection= mongoose.connect(process.env.mongoURL);
 
 // const main=async ()=>{
 //     try{

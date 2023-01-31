@@ -1,5 +1,6 @@
 const express=require("express");
 const app=express();
+require('dotenv').config()
 const {connection,TodoModel} = require('./db')
 
 app.use(express.json());
@@ -47,7 +48,7 @@ app.patch("/delete/:id",async (req,res)=>{
     }
 })
 
-app.listen('3400',async()=>{
+app.listen(process.env.port,async()=>{
    try{
     await connection
     console.log("data base connected")
