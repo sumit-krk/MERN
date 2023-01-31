@@ -1,5 +1,5 @@
 const mongoose=require("mongoose");
-const connection= mongoose.connect("mongodb://127.0.0.1:27017/todo")
+const connection= mongoose.connect("mongodb+srv://sumit:sumit@cluster0.irhgi.mongodb.net/todonew?retryWrites=true&w=majority")
 
 // const main=async ()=>{
 //     try{
