@@ -1,52 +1,16 @@
 const express=require("express");
 const app=express();
 require('dotenv').config()
-const {connection,TodoModel} = require('./db')
+const {connection} = require('./db')
+const {todoRouter}=require('./routes/todo.route')
 
 app.use(express.json());
 
-app.get("/getTask",async(req,res)=>{
-    try{
-        const task=await TodoModel.find(req.query);
-        res.send(task);
-    }catch(err){
-        console.log(err);
-        res.send("something went wrong");
-    }
+app.get('/',(req,res)=>{
+    res.send("welcome");
 })
 
-app.post("/addTask",async(req,res)=>{
-    const data=req.body;
-    try{
-        const task=new TodoModel(data);
-        await task.save();
-        res.send("task added")
-    }catch(err){
-        console.log(err)
-        res.send("something went wrong")
-    }
-})
-
-app.patch("/editTask/:id",async (req,res)=>{
-    const ID=req.params.id;
-    const task=req.body;
-    try{
-        await TodoModel.findByIdAndUpdate({_id:ID},task)
-        res.send("Updated the task");
-    }catch(err){
-        console.log("something went wrong");
-    }
-})
-
-app.patch("/delete/:id",async (req,res)=>{
-    const ID=req.params.id;
-    try{
-        await TodoModel.findByIdAndDelete({_id:ID})
-        res.send("deleted the task");
-    }catch(err){
-        console.log("something went wrong");
-    }
-})
+app.use('/todo',todoRouter)
 
 app.listen(process.env.port,async()=>{
    try{
